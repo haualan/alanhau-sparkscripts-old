@@ -18,6 +18,12 @@ class WordFreqCluster:
     result = self.ngramsData.filter(lambda s: word in s).count()
     return result
 
+  def distinct(self, word):
+    return self.ngramsData.distinct()
+
+  # def correl(self, word1, word2):
+
+
 
 
 
@@ -28,5 +34,7 @@ if __name__ == "__main__":
   # numBs = logData.filter(lambda s: 'b' in s).count()
   r1 = task2.wordFrequency('poo') 
   print 'Øverst_ADV appears:', r1 
+
+  print task2.distinct()
   # print 'Øverst_ADV appears: ', task2.wordFrequency('b') 
   # print "Lines with a: %i, lines with b: %i" % (numAs, numBs)

@@ -20,8 +20,9 @@ class WordFreqCluster:
     return result
 
   def test(self):
-    r = self.ngramsData.map(lambda x: tuple(x.split()[0:2])) \
+    r = self.ngramsData.map(lambda x: tuple(x.split()[0:3])) \
                         .filter(lambda x: x[1] > 1980 ) \
+                        .map(lambda x: x[0::2]) \
                         .reduceByKey(lambda x,y: int(x)+int(y)) \
                         .map(lambda x:(x[1],x[0])) \
                         .sortByKey(True)

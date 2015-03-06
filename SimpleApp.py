@@ -35,7 +35,7 @@ class WordFreqCluster:
     r = self.ngramsData.map(self.split_and_cast) \
                         .filter(lambda x: int(x[1]) > 1980 ) \
                         .map(lambda x: x[0::2]) \
-                        .reduceByKey(lambda x,y: int(x)+int(y)) \
+                        .reduceByKey(lambda x,y: x+y) \
                         .map(lambda x:(x[1],x[0])) \
                         .sortByKey(True)
 

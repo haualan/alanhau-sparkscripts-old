@@ -22,7 +22,7 @@ class WordFreqCluster:
     r = self.ngramsData.map(lambda x: tuple(x.split()[0::3])) \
                         .reduceByKey(lambda x,y:x+y) \
                         .map(lambda x:(x[1],x[0])) \
-                        .sortByKey(False)
+                        .sortByKey(True)
     return r.take(10)
 
 

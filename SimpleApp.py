@@ -19,6 +19,11 @@ class WordFreqCluster:
     result = self.ngramsData.filter(lambda s: word in s).count()
     return result
 
+  def split_and_cast(self, x):
+    r = x.split()[0:3]
+    r = tuple(r[0],int(r[1]),int(r[2]))
+    return r
+
   def test(self):
     r = self.ngramsData.map(lambda x: tuple(x.split()[0:3])) \
                         .filter(lambda x: int(x[1]) > 1980 ) \
@@ -26,6 +31,9 @@ class WordFreqCluster:
                         .reduceByKey(lambda x,y: int(x)+int(y)) \
                         .map(lambda x:(x[1],x[0])) \
                         .sortByKey(True)
+
+
+                        
     return r.take(10)
 
 

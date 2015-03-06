@@ -11,7 +11,8 @@ sc = SparkContext(conf=conf)
 class WordFreqCluster:
   """HW1 Task2, examine unigram frequencies, find those with highly correlated frequencies and those with low correlated frequencies"""
   def __init__(self):
-    self.ngramsFile = "googlebooks-eng-all-1gram-20120701-a"  # Should be some file on HDFS
+    # self.ngramsFile = "googlebooks-eng-all-1gram-20120701-a"  # Should be some file on HDFS
+    self.ngramsFile = "sampledata.txt"
     self.ngramsData = sc.textFile(self.ngramsFile).cache()
 
   def wordFrequency(self, word):
@@ -19,7 +20,8 @@ class WordFreqCluster:
     return result
 
   def test(self):
-    r = self.ngramsData.map(lambda x: tuple(x.split()[0::3])) \
+    r = self.ngramsData.map(lambda x: tuple(x.split()[0:2])) \
+                        .filter(lambda x: x[1] > 1980 ) \
                         .reduceByKey(lambda x,y:x+y) \
                         .map(lambda x:(x[1],x[0])) \
                         .sortByKey(True)

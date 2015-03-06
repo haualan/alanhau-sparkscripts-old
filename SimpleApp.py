@@ -21,26 +21,17 @@ class WordFreqCluster:
     self.ngramsFile = "sampledata.txt"
     self.ngramsData = sc.textFile(self.ngramsFile).cache()
 
-  def wordFrequency(self, word):
-    result = self.ngramsData.filter(lambda s: word in s).count()
-    return result
 
-  def test(self):
-    # r = self.ngramsData.map(lambda x: tuple(x.split()[0:3])) \
-    #                     .filter(lambda x: int(x[1]) > 1980 ) \
-    #                     .map(lambda x: x[0::2]) \
-    #                     .reduceByKey(lambda x,y: int(x)+int(y)) \
-    #                     .map(lambda x:(x[1],x[0])) \
-    #                     .sortByKey(True)
-
+  def topWordFrequencies(self):
     r = self.ngramsData.map(split_and_cast) \
-                        .filter(lambda x: x[1] > 1980 ) \
-                        .map(lambda x: x[0::2]) \
+                        .filter(lambda x: x[1] > 1980 ).cache()
+
+    self.recentngrams= r
+
+                      r =r.map(lambda x: x[0::2]) \
                         .reduceByKey(lambda x,y: x+y) \
                         .map(lambda x:(x[1],x[0])) \
                         .sortByKey(True)
-
-
 
     return r.take(10)
 
@@ -60,9 +51,7 @@ if __name__ == "__main__":
 
   # numAs = logData.filter(lambda s: 'a' in s).count()
   # numBs = logData.filter(lambda s: 'b' in s).count()
-  r1 = task2.wordFrequency('poo') 
-  print 'Øverst_ADV appears:', r1 
 
-  print task2.test()
+  print task2.topWordFrequencies()
   # print 'Øverst_ADV appears: ', task2.wordFrequency('b') 
   # print "Lines with a: %i, lines with b: %i" % (numAs, numBs)

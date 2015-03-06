@@ -10,7 +10,7 @@ sc = SparkContext(conf=conf)
 
 def split_and_cast(x):
   r = x.split()[0:3]
-  r = tuple(r[0],int(r[1]),int(r[2]))
+  r = tuple([r[0],int(r[1]),int(r[2])])
   return r
 
 

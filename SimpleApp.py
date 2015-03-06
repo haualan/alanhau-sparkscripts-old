@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
   # numAs = logData.filter(lambda s: 'a' in s).count()
   # numBs = logData.filter(lambda s: 'b' in s).count()
-  r1 = task2.wordFrequency('Øverst_ADV') 
+  r1 = task2.wordFrequency('poo') 
   print 'Øverst_ADV appears:', r1 
   # print 'Øverst_ADV appears: ', task2.wordFrequency('b') 
   # print "Lines with a: %i, lines with b: %i" % (numAs, numBs)

@@ -12,7 +12,7 @@ class WordFreqCluster:
   """HW1 Task2, examine unigram frequencies, find those with highly correlated frequencies and those with low correlated frequencies"""
   def __init__(self):
     self.ngramsFile = "googlebooks-eng-all-1gram-20120701-other"  # Should be some file on HDFS
-    self.ngramsData = sc.textFile(ngrams).cache()
+    self.ngramsData = sc.textFile(self.ngramsFile).cache()
 
   def wordFrequency(word):
     result = self.ngramsData.filter(lambda s: word in s).count()

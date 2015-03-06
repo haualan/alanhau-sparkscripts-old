@@ -14,7 +14,7 @@ class WordFreqCluster:
     self.ngramsFile = "googlebooks-eng-all-1gram-20120701-other"  # Should be some file on HDFS
     self.ngramsData = sc.textFile(self.ngramsFile).cache()
 
-  def wordFrequency(word):
+  def wordFrequency(self, word):
     result = self.ngramsData.filter(lambda s: word in s).count()
     return result
 

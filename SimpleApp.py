@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: ascii -*-
+# -*- coding: utf-8 -*-
 from pyspark import SparkContext, SparkConf
 # this is the location of the cluster
 master = "spark://ec2-52-10-98-37.us-west-2.compute.amazonaws.com:7077"

@@ -36,6 +36,17 @@ class WordFreqCluster:
     return r.take(10)
 
 
+  def find_distinct(self):
+    recentngrams = self.recentngrams
+    r = recentngrams.distinct()\
+                    .count()
+    return r
+
+  def find_correlation(self):
+    recentngrams = self.recentngrams
+
+
+
 
   # def correl(self, word1, word2):
 
@@ -53,5 +64,6 @@ if __name__ == "__main__":
   # numBs = logData.filter(lambda s: 'b' in s).count()
 
   print task2.topWordFrequencies()
+  print task2.find_distinct()
   # print 'Øverst_ADV appears: ', task2.wordFrequency('b') 
   # print "Lines with a: %i, lines with b: %i" % (numAs, numBs)

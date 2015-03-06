@@ -18,12 +18,21 @@ class WordFreqCluster:
     result = self.ngramsData.filter(lambda s: word in s).count()
     return result
 
-  def distinct(self):
-    return self.ngramsData.distinct()
+  def test(self):
+    r = self.ngramsData.map(lambda x: tuple(x.split()]0::3])) \
+                        .reduceByKey(lambda x,y:x+y) \
+                        .map(lambda x:(x[1],x[0])) \
+                        .sortByKey(False)
+    return r.take(10)
+
+
 
   # def correl(self, word1, word2):
 
-
+# plan:
+# 1. count frequencies of last 50 years group by word, grab 100 most frequent unigrams
+# 2. find correl coefficient of 100 by 100 Words
+# 3. sort by correl and find top and bottom 20 
 
 
 
@@ -35,6 +44,6 @@ if __name__ == "__main__":
   r1 = task2.wordFrequency('poo') 
   print 'Øverst_ADV appears:', r1 
 
-  print task2.distinct()
+  print task2.test()
   # print 'Øverst_ADV appears: ', task2.wordFrequency('b') 
   # print "Lines with a: %i, lines with b: %i" % (numAs, numBs)

@@ -18,7 +18,7 @@ class WordFreqCluster:
     result = self.ngramsData.filter(lambda s: word in s).count()
     return result
 
-  def distinct(self, word):
+  def distinct(self):
     return self.ngramsData.distinct()
 
   # def correl(self, word1, word2):

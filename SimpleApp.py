@@ -1,13 +1,30 @@
 """SimpleApp.py"""
-from pyspark import SparkContext
+from pyspark import SparkContext, SparkConf
 # this is the location of the cluster
 master = "spark://ec2-52-10-98-37.us-west-2.compute.amazonaws.com:7077"
+appName = "DataScience HW1 CT"
 
-logFile = "googlebooks-eng-all-1gram-20120701-other"  # Should be some file on your system
-sc = SparkContext(master, "Simple App")
-logData = sc.textFile(logFile).cache()
+conf = SparkConf().setAppName(appName).setMaster(master)
+sc = SparkContext(conf=conf)
 
-numAs = logData.filter(lambda s: 'a' in s).count()
-numBs = logData.filter(lambda s: 'b' in s).count()
+class WordFreqCluster:
+  """HW1 Task2, examine unigram frequencies, find those with highly correlated frequencies and those with low correlated frequencies"""
+  def __init__(self):
+    self.ngramsFile = "googlebooks-eng-all-1gram-20120701-other"  # Should be some file on HDFS
+    self.ngramsData = sc.textFile(ngrams).cache()
 
-print "Lines with a: %i, lines with b: %i" % (numAs, numBs)
+  def wordFrequency(word):
+    result = self.ngramsData.filter(lambda s: word in s).count()
+    return result
+
+
+
+
+if __name__ == "__main__":
+  task2 = WordFreqCluster()
+
+  # numAs = logData.filter(lambda s: 'a' in s).count()
+  # numBs = logData.filter(lambda s: 'b' in s).count()
+  print 'Øverst_ADV appears: ', task2.wordFrequency('Øverst_ADV') 
+  print 'Øverst_ADV appears: ', task2.wordFrequency('Łaski') 
+  # print "Lines with a: %i, lines with b: %i" % (numAs, numBs)

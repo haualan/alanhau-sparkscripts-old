@@ -1,7 +1,7 @@
 """SimpleApp.py"""
 from pyspark import SparkContext
 
-logFile = "README.md"  # Should be some file on your system
+logFile = "googlebooks-eng-all-1gram-20120701-other"  # Should be some file on your system
 sc = SparkContext("local", "Simple App")
 logData = sc.textFile(logFile).cache()
 

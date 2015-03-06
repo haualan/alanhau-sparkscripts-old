@@ -28,7 +28,7 @@ class WordFreqCluster:
 
     self.recentngrams= r
 
-                      r =r.map(lambda x: x[0::2]) \
+    r =r.map(lambda x: x[0::2]) \
                         .reduceByKey(lambda x,y: x+y) \
                         .map(lambda x:(x[1],x[0])) \
                         .sortByKey(True)
